@@ -5,14 +5,15 @@ let swap;
 let cs = 0;
 let player = 'player-1';
 let total1 = document.querySelector(`.player-1 .wrapper .total h1`);
+const newGame = document.querySelector('.container #text-box');
 let total2 = document.querySelector(`.player-2 .wrapper .total h1`);
 
 loadEventListeners(player);
 
 function loadEventListeners(player) {
-
-start = document.querySelector(`.${player} .roll-dice .ico`);
-swap = document.querySelector(`.${player} .hold .ico`);
+    start = document.querySelector(`.${player} .roll-dice .ico`);
+    swap = document.querySelector(`.${player} .hold .ico`);
+    newGame.addEventListener('click', startNewGame);
 
 start.addEventListener('click',gameRunning);
 
@@ -117,6 +118,7 @@ function Winner(){
   document.querySelector('.player-1 .hold .ico').style.display ='none';
   document.querySelector('.player-2 .roll-dice .ico').style.display ='none';
   document.querySelector('.player-2 .hold .ico').style.display ='none';
+
 }
 
 function setDisplay(playerzz){
@@ -139,10 +141,15 @@ else{
     }
 }
 
-function newGame(){
- document.querySelector('.player-2 .roll-dice .ico').style.display ='none';
- document.querySelector('.player-2 .hold .ico').style.display ='none'; 
-  cs = 0;
+function startNewGame(){
+    saveAndSwapPlayer(player);
+    document.querySelector('.player-2 .roll-dice .ico').style.display ='none';
+    document.querySelector('.player-2 .hold .ico').style.display ='none';
+    document.querySelector('.player-1 .roll-dice .ico').style.display ='block';
+    document.querySelector('.player-1 .hold .ico').style.display ='block';
+    total1.innerText = '0';
+    total2.innerText = '0';
+    cs = 0;
   player = 'player-1'; 
   loadEventListeners('player-1'); 
 }
